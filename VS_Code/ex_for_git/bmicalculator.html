@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMI Calculator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    .container {
+      margin-top: 50px;
+      border: 2px solid #b0c4de;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+
+    .btn-primary {
+      background-color: #3a5fb0;
+      border-color: #3a5fb0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BMI Calculator</h1>
+    <div class="form-group">
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="height">Height (cm):</label>
+      <input type="number" id="height" class="form-control">
+    </div>
+    <button onclick="calculateBMI()" class="btn btn-primary">Calculate BMI</button>
+    <div id="result"></div>
+    <button onclick="toggleLanguage()" class="btn btn-secondary">Switch to Portuguese</button>
+  </div>
+
+  <script>
+    var language = 'en';
+
+    function calculateBMI() {
+      var weight = document.getElementById('weight').value;
+      var height = document.getElementById('height').value / 100;
+  
+      var bmi = weight / (height * height);
+      var result = document.getElementById('result');
+      if (language === 'pt') {
+        result.innerHTML = 'Seu IMC é: ' + bmi.toFixed(2);
+      } else {
+        result.innerHTML = 'Your BMI is: ' + bmi.toFixed(2);
+      }
+    }
+
+    function toggleLanguage() {
+      if (language === 'en') {
+        language = 'pt';
+        document.body.innerHTML = document.body.innerHTML.replace('Calculate BMI', 'Calcular IMC');
+        document.body.innerHTML = document.body.innerHTML.replace('Weight (kg):', 'Peso (kg):');
+        document.body.innerHTML = document.body.innerHTML.replace('Height (cm):', 'Altura (cm):');
+        document.body.innerHTML = document.body.innerHTML.replace('Your BMI is:', 'Seu IMC é:');
+        document.querySelector('.btn-secondary').innerHTML = 'Alternar para Inglês';
+      } else {
+        language = 'en';
+        document.body.innerHTML = document.body.innerHTML.replace('Calcular IMC', 'Calculate BMI');
+        document.body.innerHTML = document.body.innerHTML.replace('Peso (kg):', 'Weight (kg):');
+        document.body.innerHTML = document.body.innerHTML.replace('Altura (cm):', 'Height (cm):');
+        document.body.innerHTML = document.body.innerHTML.replace('Seu IMC é:', 'Your BMI is:');
+        document.querySelector('.btn-secondary').innerHTML = 'Switch to Portuguese';
+      }
+    }
+  </script>
+</body>
+</html>

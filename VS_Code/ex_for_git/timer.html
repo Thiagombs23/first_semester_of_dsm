@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown Timer</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    .container {
+      margin-top: 50px;
+      border: 2px solid #b0c4de;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+
+    .btn-primary {
+      background-color: #3a5fb0;
+      border-color: #3a5fb0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Countdown Timer</h1>
+    <div class="form-group">
+      <label for="countdown">Countdown (seconds):</label>
+      <input type="number" id="countdown" class="form-control">
+    </div>
+    <button onclick="startCountdown()" class="btn btn-primary">Start Countdown</button>
+    <div id="timer"></div>
+    <button onclick="toggleLanguage()" class="btn btn-secondary">Switch to Portuguese</button>
+  </div>
+
+  <script>
+    var language = 'en';
+
+    function startCountdown() {
+      var countdown = document.getElementById('countdown').value;
+      var timer = document.getElementById('timer');
+  
+      var interval = setInterval(function() {
+        countdown--;
+        if (language === 'pt') {
+          timer.innerHTML = 'Tempo restante: ' + countdown + ' segundos';
+        } else {
+          timer.innerHTML = 'Time remaining: ' + countdown + ' seconds';
+        }
+    
+        if (countdown <= 0) {
+          clearInterval(interval);
+          if (language === 'pt') {
+            timer.innerHTML = 'Contagem regressiva concluída!';
+          } else {
+            timer.innerHTML = 'Countdown complete!';
+          }
+        }
+      }, 1000);
+    }
+
+    function toggleLanguage() {
+      if (language === 'en') {
+        language = 'pt';
+        document.body.innerHTML = document.body.innerHTML.replace('Start Countdown', 'Iniciar Contagem Regressiva');
+        document.body.innerHTML = document.body.innerHTML.replace('Countdown (seconds):', 'Contagem Regressiva (segundos):');
+        document.body.innerHTML = document.body.innerHTML.replace('Time remaining:', 'Tempo restante:');
+        document.body.innerHTML = document.body.innerHTML.replace('Countdown complete!', 'Contagem regressiva concluída!');
+        document.querySelector('.btn-secondary').innerHTML = 'Alternar para Inglês';
+      } else {
+        language = 'en';
+        document.body.innerHTML = document.body.innerHTML.replace('Iniciar Contagem Regressiva', 'Start Countdown');
+        document.body.innerHTML = document.body.innerHTML.replace('Contagem Regressiva (segundos):', 'Countdown (seconds):');
+        document.body.innerHTML = document.body.innerHTML.replace('Tempo restante:', 'Time remaining:');
+        document.body.innerHTML = document.body.innerHTML.replace('Contagem regressiva concluída!', 'Countdown complete!');
+        document.querySelector('.btn-secondary').innerHTML = 'Switch to Portuguese';
+      }
+    }
+  </script>
+</body>
+</html>

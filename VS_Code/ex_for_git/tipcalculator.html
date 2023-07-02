@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tip Calculator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    .container {
+      margin-top: 50px;
+      border: 2px solid #b0c4de;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+
+    .btn-primary {
+      background-color: #3a5fb0;
+      border-color: #3a5fb0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tip Calculator</h1>
+    <div class="form-group">
+      <label for="billAmount">Bill Amount ($):</label>
+      <input type="number" id="billAmount" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="tipPercentage">Tip Percentage (%):</label>
+      <input type="number" id="tipPercentage" class="form-control">
+    </div>
+    <button onclick="calculateTip()" class="btn btn-primary">Calculate Tip</button>
+    <div id="totalAmount"></div>
+    <button onclick="toggleLanguage()" class="btn btn-secondary">Switch to Portuguese</button>
+  </div>
+
+  <script>
+    var language = 'en';
+
+    function calculateTip() {
+      var billAmount = document.getElementById('billAmount').value;
+      var tipPercentage = document.getElementById('tipPercentage').value;
+  
+      var tipAmount = billAmount * (tipPercentage / 100);
+      var totalAmount = parseFloat(billAmount) + tipAmount;
+      var result = document.getElementById('totalAmount');
+      if (language === 'pt') {
+        result.innerHTML = 'Valor Total (incluindo gorjeta): $' + totalAmount.toFixed(2);
+      } else {
+        result.innerHTML = 'Total Amount (including tip): $' + totalAmount.toFixed(2);
+      }
+    }
+
+    function toggleLanguage() {
+      if (language === 'en') {
+        language = 'pt';
+        document.body.innerHTML = document.body.innerHTML.replace('Calculate Tip', 'Calcular Gorjeta');
+        document.body.innerHTML = document.body.innerHTML.replace('Bill Amount ($):', 'Valor da Conta ($):');
+        document.body.innerHTML = document.body.innerHTML.replace('Tip Percentage (%):', 'Percentual de Gorjeta (%):');
+        document.body.innerHTML = document.body.innerHTML.replace('Total Amount (including tip):', 'Valor Total (incluindo gorjeta):');
+        document.querySelector('.btn-secondary').innerHTML = 'Alternar para Inglês';
+      } else {
+        language = 'en';
+        document.body.innerHTML = document.body.innerHTML.replace('Calcular Gorjeta', 'Calculate Tip');
+        document.body.innerHTML = document.body.innerHTML.replace('Valor da Conta ($):', 'Bill Amount ($):');
+        document.body.innerHTML = document.body.innerHTML.replace('Percentual de Gorjeta (%):', 'Tip Percentage (%):');
+        document.body.innerHTML = document.body.innerHTML.replace('Valor Total (incluindo gorjeta):', 'Total Amount (including tip):');
+        document.querySelector('.btn-secondary').innerHTML = 'Switch to Portuguese';
+      }
+    }
+  </script>
+</body>
+</html>
